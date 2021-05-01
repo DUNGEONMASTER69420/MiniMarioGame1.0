@@ -20,9 +20,9 @@ screen = pygame.display.set_mode(scr_size)
 clock = pygame.time.Clock()
 pygame.display.set_caption("Mario Run 1.0 ")
 
-jump_sound = pygame.mixer.Sound('C:/Users/User/Downloads/Mario_sprites_jump.wav')
-die_sound = pygame.mixer.Sound('C:/Users/User/Downloads/Mario_sprites_die.wav')
-checkPoint_sound = pygame.mixer.Sound('C:/Users/User/Downloads/Mario_sprites_checkPoint.wav')
+jump_sound = pygame.mixer.Sound('sprites/Mario_sprites_jump.wav')
+die_sound = pygame.mixer.Sound('sprites/Mario_sprites_die.wav')
+checkPoint_sound = pygame.mixer.Sound('sprites/Mario_sprites_checkPoint.wav')
 
 
 def load_image(
@@ -116,8 +116,8 @@ def extractDigits(number):
 
 class Mario():
     def __init__(self, sizex=-1, sizey=-1):
-        self.images, self.rect = load_sprite_sheet('C:/Users/User/Downloads/mario.png', 5, 1, sizex, sizey, -1)
-        self.images1, self.rect1 = load_sprite_sheet('C:/Users/User/Downloads/mario_ducking.png', 2, 1, 59, sizey, -1)
+        self.images, self.rect = load_sprite_sheet('mario.png', 5, 1, sizex, sizey, -1)
+        self.images1, self.rect1 = load_sprite_sheet('mario_ducking.png', 2, 1, 59, sizey, -1)
         self.rect.bottom = int(0.98 * height)
         self.rect.left = width / 15
         self.image = self.images[0]
@@ -188,7 +188,8 @@ class Mario():
 class Wall(pygame.sprite.Sprite):
     def __init__(self, speed=5, sizex=-1, sizey=-1):
         pygame.sprite.Sprite.__init__(self, self.containers)
-        self.images, self.rect = load_sprite_sheet('C:/Users/User/Downloads/wall-small.jpg', 3, 1, sizex, sizey, -1)
+        self.containers = None
+        self.images, self.rect = load_sprite_sheet('wall-small.jpg', 3, 1, sizex, sizey, -1)
         self.rect.bottom = int(0.98 * height)
         self.rect.left = width + self.rect.width
         self.image = self.images[random.randrange(0, 3)]
@@ -207,7 +208,7 @@ class Wall(pygame.sprite.Sprite):
 class Mushroom(pygame.sprite.Sprite):
     def __init__(self, speed=5, sizex=-1, sizey=-1):
         pygame.sprite.Sprite.__init__(self, self.containers)
-        self.images, self.rect = load_sprite_sheet('C:/Users/User/Downloads/gribi_zlie.png', 2, 1, sizex, sizey, -1)
+        self.images, self.rect = load_sprite_sheet('gribi_zlie.png', 2, 1, sizex, sizey, -1)
         self.mushroom_height = [height * 0.82, height * 0.75, height * 0.60]
         self.rect.centery = self.mushroom_height[random.randrange(0, 3)]
         self.rect.left = width + self.rect.width
@@ -231,8 +232,8 @@ class Mushroom(pygame.sprite.Sprite):
 
 class Ground():
     def __init__(self, speed=-5):
-        self.image, self.rect = load_image('C:/Users/User/Downloads/ground_mario.png', -1, -1, -1)
-        self.image1, self.rect1 = load_image('C:/Users/User/Downloads/ground_mario.png', -1, -1, -1)
+        self.image, self.rect = load_image('ground_mario.png', -1, -1, -1)
+        self.image1, self.rect1 = load_image('ground_mario.png', -1, -1, -1)
         self.rect.bottom = height
         self.rect1.bottom = height
         self.rect1.left = self.rect.right
@@ -256,7 +257,7 @@ class Ground():
 class Cloud(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self, self.containers)
-        self.image, self.rect = load_image('C:/Users/User/Downloads/cloud.png', int(90 * 30 / 42), 30, -1)
+        self.image, self.rect = load_image('cloud.png', int(90 * 30 / 42), 30, -1)
         self.speed = 1
         self.rect.left = x
         self.rect.top = y
@@ -274,7 +275,7 @@ class Cloud(pygame.sprite.Sprite):
 class Scoreboard():
     def __init__(self, x=-1, y=-1):
         self.score = 0
-        self.tempimages, self.temprect = load_sprite_sheet('C:/Users/User/Downloads/numbers.png', 12, 1, 11, int(11 * 6 / 5), -1)
+        self.tempimages, self.temprect = load_sprite_sheet('numbers.png', 12, 1, 11, int(11 * 6 / 5), -1)
         self.image = pygame.Surface((55, int(11 * 6 / 5)))
         self.rect = self.image.get_rect()
         if x == -1:
@@ -303,11 +304,11 @@ def introscreen():
     temp_mario.isBlinking = True
     gameStart = False
 
-    temp_ground, temp_ground_rect = load_sprite_sheet('C:/Users/User/Downloads/ground_mario.png', 15, 1, -1, -1, -1)
+    temp_ground, temp_ground_rect = load_sprite_sheet('ground_mario.png', 15, 1, -1, -1, -1)
     temp_ground_rect.left = width / 20
     temp_ground_rect.bottom = height
 
-    logo, logo_rect = load_image('C:/Users/User/Downloads/logo_mario.png', 300, 140, -1)
+    logo, logo_rect = load_image('logo_mario.png', 300, 140, -1)
     logo_rect.centerx = width * 0.6
     logo_rect.centery = height * 0.6
     while not gameStart:
@@ -361,10 +362,10 @@ def gameplay():
     Mushroom.containers = mushrooms
     Cloud.containers = clouds
 
-    retbutton_image, retbutton_rect = load_image('C:/Users/User/Downloads/replay_button.png', 35, 31, -1)
-    gameover_image, gameover_rect = load_image('C:/Users/User/Downloads/game_over_mario.png', 190, 11, -1)
+    retbutton_image, retbutton_rect = load_image('replay_button.png', 35, 31, -1)
+    gameover_image, gameover_rect = load_image('game_over_mario.png', 190, 11, -1)
 
-    temp_images, temp_rect = load_sprite_sheet('C:/Users/User/Downloads/numbers.png', 12, 1, 11, int(11 * 6 / 5), -1)
+    temp_images, temp_rect = load_sprite_sheet('numbers.png', 12, 1, 11, int(11 * 6 / 5), -1)
     HI_image = pygame.Surface((22, int(11 * 6 / 5)))
     HI_rect = HI_image.get_rect()
     HI_image.fill(background_col)
