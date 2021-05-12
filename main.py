@@ -308,7 +308,7 @@ def introscreen():
     temp_ground_rect.left = width / 20
     temp_ground_rect.bottom = height
 
-    logo, logo_rect = load_image('logo_mario.png', 300, 140, -1)
+    logo, logo_rect = load_image('logo_mario.png', 400, 240, -1)
     logo_rect.centerx = width * 0.6
     logo_rect.centery = height * 0.6
     while not gameStart:
